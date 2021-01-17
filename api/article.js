@@ -46,3 +46,26 @@ export const getComments = slug => {
     })
 }
 
+
+export const publishArticle = (data) => {
+    return request({
+        method: "POST",
+        url: '/api/articles',
+        data
+    })
+}
+
+export const updateArticle = (slug, data) => {
+    return request({
+        method: "PUT",
+        url: `/api/articles/${slug}`,
+        data
+    })
+}
+
+export const deleteArticle = slug => {
+    return request({
+        method: "DELETE",
+        url: `/api/articles/${slug}`
+    })
+}

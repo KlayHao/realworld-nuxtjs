@@ -26,7 +26,7 @@ module.exports = {
                             component: resolve(__dirname, 'pages/login')
                         },
                         {
-                            path: '/profile/:username',
+                            path: '/profile/:username/:favorites?',
                             name: 'profile',
                             component: resolve(__dirname, 'pages/profile')
                         },
@@ -36,7 +36,7 @@ module.exports = {
                             component: resolve(__dirname, 'pages/settings')
                         },
                         {
-                            path: '/editor',
+                            path: '/editor/:slug?',
                             name: 'editor',
                             component: resolve(__dirname, 'pages/editor')
                         },
@@ -53,7 +53,7 @@ module.exports = {
 
     server: {
         host: '0.0.0.0',
-        port: 3000,
+        port: 3389,
     },
     // 注册插件
     plugins: [

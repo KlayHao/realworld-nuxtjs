@@ -44,7 +44,7 @@ export const routerOptions = {
       component: _6ff7c568,
       name: "register"
     }, {
-      path: "/profile/:username",
+      path: "/profile/:username/:favorites?",
       component: _2a42dbe8,
       name: "profile"
     }, {
@@ -52,7 +52,7 @@ export const routerOptions = {
       component: _a14e9c78,
       name: "settings"
     }, {
-      path: "/editor",
+      path: "/editor/:slug?",
       component: _fb15e964,
       name: "editor"
     }, {

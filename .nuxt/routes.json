@@ -22,7 +22,7 @@
         "_name": "_6ff7c568"
       },
       {
-        "path": "/profile/:username",
+        "path": "/profile/:username/:favorites?",
         "name": "profile",
         "component": "/Users/kanhao/study/lagou-study/study-task-03-03/realworld-nuxtjs/pages/profile",
         "_name": "_2a42dbe8"
@@ -34,7 +34,7 @@
         "_name": "_a14e9c78"
       },
       {
-        "path": "/editor",
+        "path": "/editor/:slug?",
         "name": "editor",
         "component": "/Users/kanhao/study/lagou-study/study-task-03-03/realworld-nuxtjs/pages/editor",
         "_name": "_fb15e964"

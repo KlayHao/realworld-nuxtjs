@@ -74,22 +74,51 @@
             class="article-preview"
           >
             <div class="article-meta">
-              <a href=""><img :src="article.author.image" /></a>
+              <nuxt-link
+                :to="{
+                  name: 'profile',
+                  params: {
+                    username: article.author.username,
+                  },
+                }"
+                ><img :src="article.author.image"
+              /></nuxt-link>
               <div class="info">
-                <a href="" class="author">{{ article.author.username }}</a>
+                <nuxt-link
+                  :to="{
+                    name: 'profile',
+                    params: {
+                      username: article.author.username,
+                    },
+                  }"
+                  class="author"
+                  >{{ article.author.username }}</nuxt-link
+                >
                 <span class="date">{{
                   article.createdAt | date("MMM dd, YYYY")
                 }}</span>
               </div>
-              <button class="btn btn-outline-primary btn-sm pull-xs-right">
+              <button
+                class="btn btn-outline-primary btn-sm pull-xs-right"
+                :disabled="article.favoriteDisabled"
+                @click="onFavorited(article)"
+              >
                 <i class="ion-heart"></i> {{ article.favoritesCount }}
               </button>
             </div>
-            <a href="" class="preview-link">
+            <nuxt-link
+              :to="{
+                name: 'article',
+                params: {
+                  slug: article.slug,
+                },
+              }"
+              class="preview-link"
+            >
               <h1>{{ article.title }}</h1>
               <p>{{ article.body }}</p>
               <span>Read more...</span>
-            </a>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -98,7 +127,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import { getArticles } from "@/api/article";
+import { getArticles, addFavorite, deleteFavorite } from "@/api/article";
 import { getProfile } from "@/api/profile";
 export default {
   name: "UserProfile",
@@ -123,11 +152,25 @@ export default {
             }
       ),
     ]);
-    console.log(params);
     return { favorited: !!params.favorites, profile, articles };
   },
   computed: {
     ...mapState(["user"]),
+  },
+  methods: {
+    async onFavorited(article) {
+      article.favoriteDisabled = true;
+      if (article.favorited) {
+        await deleteFavorite(article.slug);
+        article.favorited = false;
+        article.favoritesCount -= 1;
+      } else {
+        await addFavorite(article.slug);
+        article.favorited = true;
+        article.favoritesCount += 1;
+      }
+      article.favoriteDisabled = false;
+    },
   },
 };
 </script>
